@@ -1,7 +1,8 @@
 const pdf = require("pdf-creator-node");
 const fs = require('fs');
 
-let pdfConfig = {};
+let pdfConfig = {}
+let filesCount = 0
 
 // absolutePath: string - el path donde se van a guardar los archivos generados
 // opciones: {format: string, orientation: string, boder: string, footer: {height: string, constents: {first: string, 2: string, default: html, last: string}}}
@@ -10,10 +11,12 @@ function createPdfModule(absolutePath, opciones, templates) {
 
     pdfConfig.opciones = opciones
     pdfConfig.templatesPath = __dirname + '/templates'
+    pdfConfig.createdPdfsPath = absolutePath
     cargarTemplates(templates)
 
     return {
         generarPdf: async (templateName, data) => {
+            console.log('data para la response', data)
             return crearArchivoPdf(templateName, data);
         }
     }
@@ -22,9 +25,14 @@ function createPdfModule(absolutePath, opciones, templates) {
 function crearArchivoPdf (template, data) {
     let response;
 
+    console.log('data para el pdf', data)
+
     try {
         const html = leerTemplate(template);
         const documento = crearDocumento(html, data);
+
+        console.log('opciones-> ', pdfConfig.opciones)
+
         response = pdf.create(documento, pdfConfig.opciones).then(res => res).catch(error => console.error(error));
     } catch (e) {
         console.error('No se pudo ejecutar la accion: ', e)
@@ -34,7 +42,7 @@ function crearArchivoPdf (template, data) {
 }
 
 function leerTemplate(template) {
-    const path = `${pdfConfig.templatePath}`;
+    const path = `${pdfConfig.templatesPath}`;
     const file = `${path}/${template}.html`;
 
     if (!fs.existsSync(path)) {
@@ -45,7 +53,7 @@ function leerTemplate(template) {
         throw Error('El template solicitado no existe: ' + template);
     }
 
-    return fs.readFileSync(path, 'utf8');
+    return fs.readFileSync(file, 'utf8');
 }
 
 function cargarTemplates(templates) {
@@ -61,15 +69,14 @@ function cargarTemplates(templates) {
 
 }
 
-function agregarTemplate (templateName, archivo) {
+function crearDocumento (html, contenido) {
+    const fileName = `archivo-${filesCount}.pdf`
 
-}
-
-function crearDocumento (html, { documento, contenido }) {
-    const path = `${pdfConfig.documentsPath}/${documento.nombre}.pdf`;
+    const path = `${pdfConfig.createdPdfsPath}/${fileName}`;
+    filesCount++
 
     if (fs.existsSync(path)) {
-        throw Error('Ya existe un archivo con el nombre' + documento.nombre);
+        throw Error('Ya existe un archivo con el nombre' + fileName);
     }
 
     return {

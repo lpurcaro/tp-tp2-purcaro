@@ -15,7 +15,12 @@ function crearEnsayosRouter({ aplicacion }) {
         const pdfCreator = await  pdfCreatorFactory.getPdfCreator()
 
         const ensayo = await ensayosApi.create(req.body)
-        await emailSender.sendEmail({ from: process.env.GMAIL_USER, to: req.body.enrolador.email, subject: 'Alta de ensayo clínico', text: 'Se encuentra adjunto el archivo con los datos del ensayo cargado' })
+
+        const filePath = await pdfCreator.generarPdf('ensayoClinico', ensayo)
+
+        if (filePath) {
+            await emailSender.sendEmail({ from: process.env.GMAIL_USER, to: req.body.enrolador.email, subject: 'Alta de ensayo clínico', text: 'Se encuentra adjunto el archivo con los datos del ensayo cargado' })
+        }
 
         res.status(201).json(ensayo)
     }))
