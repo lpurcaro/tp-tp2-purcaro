@@ -16,7 +16,6 @@ function createPdfModule(absolutePath, opciones, templates) {
 
     return {
         generarPdf: async (templateName, data) => {
-            console.log('data para la response', data)
             return crearArchivoPdf(templateName, data);
         }
     }
@@ -25,13 +24,9 @@ function createPdfModule(absolutePath, opciones, templates) {
 function crearArchivoPdf (template, data) {
     let response;
 
-    console.log('data para el pdf', data)
-
     try {
         const html = leerTemplate(template);
         const documento = crearDocumento(html, data);
-
-        console.log('opciones-> ', pdfConfig.opciones)
 
         response = pdf.create(documento, pdfConfig.opciones).then(res => res).catch(error => console.error(error));
     } catch (e) {
