@@ -25,6 +25,7 @@
 4) La aplicación se levanta en el puerto 8080, por lo que la url base cuando queramos consumir la api va a ser `localhost:8080`
 
 ## Documentacion de la Api
+Las pruebas de funcionalidad de la api se hicieron a través de Postman, por lo que esta documentacion esta orientada a una implemetacion a través de esa herramienta.
 
 Es necesario, cuando se ejecuten métodos de tipo `POST`, tener seteados los siguientes headers:
     
