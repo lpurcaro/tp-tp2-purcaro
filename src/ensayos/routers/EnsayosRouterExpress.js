@@ -14,7 +14,7 @@ function crearEnsayosRouter({ aplicacion }) {
 
         const ensayo = await ensayosApi.create(req.body)
 
-        await emailSender.sendEmail({ from: process.env.GMAIL_USER, to: 'lucila.purcaro@gmail.com', subject: 'Alta de ensayo clínico', text: 'Se encuentra adjunto el archivo con los datos del ensayo cargado' })
+        await emailSender.sendEmail({ from: process.env.GMAIL_USER, to: ensayo.enrolador.email, subject: 'Alta de ensayo clínico', text: 'Se encuentra adjunto el archivo con los datos del ensayo cargado' })
 
         res.status(201).json(ensayo)
     }))
