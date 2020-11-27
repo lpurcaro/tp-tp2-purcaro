@@ -60,6 +60,7 @@ function crearEnsayo(objeto) {
         ensayo.fechaFin = objeto.fechaFin
     }
 
+
     if (!objeto.id) {
         ensayo.id = nextId++
     } else {

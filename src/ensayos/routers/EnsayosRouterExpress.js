@@ -1,4 +1,5 @@
 const express = require('express')
+const mailerFactory = require('../../factories/mailerFactory')
 
 let wrap = fn => (...args) => fn(...args).catch(args[2])
 
@@ -8,6 +9,8 @@ function crearEnsayosRouter({ aplicacion }) {
     const ensayosApi = aplicacion.ensayosApi
 
     router.post('/', wrap(async (req, res) => {
+        const emailSender = await mailerFactory.getMailer();
+
         const ensayo = await ensayosApi.create(req.body)
         res.status(201).json(ensayo)
     }))
