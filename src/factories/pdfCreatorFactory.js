@@ -21,13 +21,7 @@ const opciones = {
 }
 
 const pdfCreatorFactory = {
-    getPdfCreator: async () => {
-
-        const currentDir = process.cwd()
-
-        const templatesDir = `${currentDir}/src/templates`
-        const filesDir = `${currentDir}/src/generated-pdfs`
-
+    getPdfCreator: async (templatesDir, filesDir) => {
         const templates = fs.readdirSync(templatesDir).map(fileName => {
             const dir = templatesDir + '/' + fileName
             const content = fs.readFileSync(dir, 'utf-8')
