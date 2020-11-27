@@ -9,7 +9,9 @@ function crearEnsayosRouter({ aplicacion }) {
     const ensayosApi = aplicacion.ensayosApi
 
     router.post('/', wrap(async (req, res) => {
-        const emailSender = await mailerFactory.getMailer();
+
+        const emailSender = await mailerFactory.getMailer()
+        const pdfCreator = await  pdfCreatorFactory.getPdfCreator()
 
         const ensayo = await ensayosApi.create(req.body)
         res.status(201).json(ensayo)
