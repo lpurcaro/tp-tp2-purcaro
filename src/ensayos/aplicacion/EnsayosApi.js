@@ -6,16 +6,18 @@ function crearEnsayosApi(ensayosDao) {
             const ensayo = crearEnsayo(dato)
             await ensayosDao.add(ensayo)
             return ensayo
+        },
+        getAll: async () => {
+            const ensayos = await ensayosDao.getAll()
+            return ensayos
+        },
+        getById: async (id) => {
+        	const ensayo = await ensayosDao.getById(id)
+            return ensayo
         }
     }
 }
 
-// function crearDniValido(dato) {
-//     if (isNaN(dato)) {
-//         throw crearErrorArgumentosInvalidos('el dni del paciente debe ser numerico')
-//     }
-//     return dato
-// }
 
 
 module.exports = { crearEnsayosApi }

@@ -8,8 +8,9 @@ async function crearEnsayosDaoMemoria() {
         getAll: async () => {
             return [...elementos]
         },
-        getById: async (dni) => {
-            return elementos.filter(e => e.dni === dni)
+        getById: async (id) => {
+            console.log(elementos)
+            return elementos.find(e => e.id == id)
         },
         close: async () => { }
     }

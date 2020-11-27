@@ -38,6 +38,7 @@ async function crearEnsayosDaoDb({ cnxStr, dbName, collectionName }) {
         },
         getById: async (id) => {
             const registros = await collection.find({ id: id }).toArray()
+            console.log(registro)
             const ensayos = registros.map(reg => crearEnsayo(reg))
             return ensayos
         },

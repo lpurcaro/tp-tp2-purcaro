@@ -9,7 +9,6 @@ async function crearEnsayosDao() {
     if (tipoPersistencia === 'memoria')
         return await crearEnsayosDaoMemoria()
     else if (tipoPersistencia === 'db') {
-        console.log(tipoPersistencia)
         return await crearEnsayosDaoDb(config.getCnxObj())
     } else
         throw new Error('invalid type of db')

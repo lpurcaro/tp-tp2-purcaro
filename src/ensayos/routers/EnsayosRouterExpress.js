@@ -5,25 +5,26 @@ let wrap = fn => (...args) => fn(...args).catch(args[2])
 function crearEnsayosRouter({ aplicacion }) {
     router = express.Router()
 
-    const ensayosApi = aplicacion
+    const ensayosApi = aplicacion.ensayosApi
 
-    router.post('/add', wrap(async (req, res) => {
-
+    router.post('/', wrap(async (req, res) => {
         const ensayo = await ensayosApi.create(req.body)
         res.status(201).json(ensayo)
     }))
 
-    // router.delete('/:id', wrap(async (req, res) => {
-    //     await estudiantesApi.deleteById(req.params.id)
-    //     res.status(204).json()
-    // }))
-    //
-    // router.put('/:id', wrap(async (req, res) => {
-    //     const estudiante = await estudiantesApi.replaceById(req.body, req.params.id)
-    //     res.json(estudiante)
-    // }))
+    router.get('/:id', wrap(async (req, res) => {
+        const ensayos = await ensayosApi.getById(req.params.id)
+        res.json(ensayos)
+    }))
+
+    router.get('/', wrap(async (req, res) => {
+        const ensayos = await ensayosApi.getAll()
+        res.json(ensayos)
+    }))
+
 
     return router
 }
+
 
 module.exports = { crearEnsayosRouter }

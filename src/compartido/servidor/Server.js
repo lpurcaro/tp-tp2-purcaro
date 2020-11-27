@@ -1,5 +1,6 @@
 const express = require('express')
 const { crearEnsayosRouter } = require('../../ensayos/routers/EnsayosRouterExpress.js')
+const { crearPacientesRouter } = require('../../pacientes/routers/PacientesRouterExpress.js')
 
 function createServer({ port = 0, aplicacion }) {
 
@@ -7,7 +8,8 @@ function createServer({ port = 0, aplicacion }) {
 
     app.use(express.json())
 
-    app.use('/api/ensayos', crearEnsayosRouter({ aplicacion }))
+    app.use('/api/ensayo', crearEnsayosRouter({ aplicacion }))
+    app.use('/api/paciente', crearPacientesRouter({ aplicacion }))
 
     app.use(manejadorDeErrores)
 

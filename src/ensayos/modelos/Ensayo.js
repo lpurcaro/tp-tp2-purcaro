@@ -6,18 +6,16 @@ function crearEnsayo(objeto) {
 
     const ensayo = {}
 
-    console.log(objeto)
-
     if (!objeto.laboratorio) {
         throw crearErrorArgumentosInvalidos('laboratorio', 'campo requerido')
     } else {
         ensayo.laboratorio = objeto.laboratorio
     }
 
-    if (!objeto.usuario) {
-        throw crearErrorArgumentosInvalidos('usuario', 'campo requerido')
+    if (!objeto.enrolador) {
+        throw crearErrorArgumentosInvalidos('enrolador', 'campo requerido')
     } else {
-        ensayo.usuario = objeto.usuario
+        ensayo.enrolador = objeto.enrolador
     }
 
     if (!objeto.titulo) {
@@ -30,6 +28,18 @@ function crearEnsayo(objeto) {
         throw crearErrorArgumentosInvalidos('descripcion', 'campo requerido')
     } else {
         ensayo.descripcion = objeto.descripcion
+    }
+
+    if (!objeto.requisitos) {
+        throw crearErrorArgumentosInvalidos('requisitos', 'campo requerido')
+    } else {
+        ensayo.requisitos = objeto.requisitos
+    }
+
+    if (!objeto.colors) {
+        throw crearErrorArgumentosInvalidos('colors', 'campo requerido')
+    } else {
+        ensayo.colors = objeto.colors
     }
 
     if (isNaN(parseInt(objeto.pacientes))) {
@@ -48,10 +58,6 @@ function crearEnsayo(objeto) {
         throw crearErrorArgumentosInvalidos('fechaFin', 'campo requerido')
     } else {
         ensayo.fechaFin = objeto.fechaFin
-    }
-
-    if (!objeto.dni) {
-        throw crearErrorArgumentosInvalidos('dni', 'campo requerido')
     }
 
     if (!objeto.id) {
