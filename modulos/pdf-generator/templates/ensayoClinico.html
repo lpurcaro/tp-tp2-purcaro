@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Example 2</title>
+        <link rel="stylesheet" href="style.css" media="all" />
+    </head>
+    <body style="max-width: 900px; margin: auto; font-family: sans-serif; color: grey; font-size: 14px;">
+        <div style="border-bottom: 1px solid grey; padding: 10px 0px;">
+            <img src="{{laboratorio.logo}}" style="width: 200px;">
+            <div style="float: right; text-align: end">
+                <h2 style="margin: 10px 0; font-size: 1.4em">Alta de ensayo clínico</h2>
+                <div>{{laboratorio.nombre}}</div>
+                <div>{{laboratorio.telefono}}</div>
+                <div><a href="mailto:company@example.com">{{laboratorio.email}}</a></div>
+            </div>
+        </div>
+        <div>
+            <div style="padding-top: 20px;">
+                <div style="border-left: 15px solid #05BCFF; padding: 10px; display: inline-block">
+                    <div style="text-transform: uppercase;">Responsable de la búsqueda</div>
+                    <div style="font-size: 1.4em; margin: 5px 0;">{{enrolador.nombre}}</div>
+                    <div>Cantidad de ensayos publicados: {{enrolador.ensayosPublicados}}</div>
+                    <div>Email de contacto: <a href="mailto:john@example.com">{{enrolador.email}}</a></div>
+                </div>
+                <div style="display: inline-block; text-align: end; float: right">
+                    <h2 style="margin: 5px 0px 10px; text-transform: uppercase; color: #05BCFF">Vigencia</h2>
+                    <div>Fecha de inicio: {{fechaInicio}}</div>
+                    <div>Fecha de fin: {{fechaFin}}</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 50px;">
+                <h2 style="margin: 5px 0px 10px; text-transform: uppercase; color: #05BCFF">{{titulo}}</h2>
+                <p>Identificador de ensayo: {{id}}</p>
+                <p>{{descripcion}}</p>
+            </div>
+
+            <div style="margin-top: 20px; border-left: 15px solid #05BCFF; padding: 10px;">
+                <p style="margin: 0">Para el ensayo clinico correspondiente se han enrolado <span style="font-weight: bold">{{pacientes}} cantidad de pacientes</span>, los cuales deberán se listan a continuacion: </p>
+            </div>
+
+            <ul style="list-style: none;">
+                {{#each pacientes}}
+                <li>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Light_green_check.svg/1024px-Light_green_check.svg.png" style="width: 15px"/>
+                    {{this}}
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+    </body>
+</html>
